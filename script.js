@@ -4,11 +4,11 @@ var jugador = 1
 function dibujar() {
     for (i = 0; i<9; i++) {
     if (estado_tablero [i] == 0)
-    document.getElementById("celda" + i).style = "bacground-color: white";
+    document.getElementById("celda" + i).style = "background-color: white";
     if (estado_tablero [i] == 1)
-    document.getElementById("celda" + i).style = "bacground-color: red";
+    document.getElementById("celda" + i).style = "background-color: red";
     if (estado_tablero [i] == 2)
-    document.getElementById("celda" + i).style = "bacground-color: blue";
+    document.getElementById("celda" + i).style = "background-color: blue";
     }
 }
 
