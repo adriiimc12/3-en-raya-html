@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>3ENRAYA</title>
+</head>
+<body>
+<script>
+var estado_tablero = [0,0,0,0,0,0,0,0,0];
+
+var jugador = 1;
+
+function dibujar() {
+    for (i = 0; i<9; i++) {
+        if (estado_tablero[i] == 0) document.getElementById("celda" + i).style = "background-image: url('image.gif')";
+        if (estado_tablero[i] == 1) document.getElementById("celda" + i).style = "background-image: url('amd.png')";
+        if (estado_tablero[i] == 2) document.getElementById("celda" + i).style = "background-image: url('intel.png')";
+    }
+}
+
+function clickcelda(celda) {
+    if (estado_tablero[celda] == 0){
+        if (jugador == 1){
+            estado_tablero[celda] = 1;
+            jugador = 2;
+        } else{
+            estado_tablero[celda] = 2;
+            jugador = 1;
+        }
+    } else {
+        alert("No puedes pintar una casilla coloreada")
+    }
+    dibujar();
+    var estado = ganador();
+    mostrar_mensaje(estado);
+}
+
+function ganador() {
+            var numCeldasVacias = 0;
+            for (i = 0; i < 9; i++) {
+                if (estado_tablero[i] == 0) numCeldasVacias = numCeldasVacias + 1;
+            }
+
+            if (estado_tablero[0] == estado_tablero[1] && estado_tablero[1] == estado_tablero[2] && estado_tablero[0] != 0) return estado_tablero[0];
+            if (estado_tablero[3] == estado_tablero[4] && estado_tablero[4] == estado_tablero[5] && estado_tablero[3] != 0) return estado_tablero[3];
+            if (estado_tablero[6] == estado_tablero[7] && estado_tablero[7] == estado_tablero[8] && estado_tablero[6] != 0) return estado_tablero[6];
+
+            if (estado_tablero[0] == estado_tablero[3] && estado_tablero[3] == estado_tablero[6] && estado_tablero[0] != 0) return estado_tablero[0];
+            if (estado_tablero[1] == estado_tablero[4] && estado_tablero[4] == estado_tablero[7] && estado_tablero[1] != 0) return estado_tablero[1];
+            if (estado_tablero[2] == estado_tablero[5] && estado_tablero[5] == estado_tablero[8] && estado_tablero[2] != 0) return estado_tablero[2];
+
+            if (estado_tablero[0] == estado_tablero[4] && estado_tablero[4] == estado_tablero[8] && estado_tablero[0] != 0) return estado_tablero[0];
+            if (estado_tablero[2] == estado_tablero[4] && estado_tablero[4] == estado_tablero[6] && estado_tablero[2] != 0) return estado_tablero[2];
+
+            if (numCeldasVacias > 0) {
+                return 0;
+            } else {
+                return 3;
+            }
+        }
+
+
+
+function mostrar_mensaje(estado) {
+    if (estado == 0) {
+
+    } else if (estado == 1) {
+        alert("AMD WINS!!")
+    } else if (estado == 2) {
+        alert("INTEL WINS!!")
+    } else if (estado == 3) {
+        alert("TIE")
+    }
+}
+</script>
+
+    <div id='botones'>
+    <button><a class="boton" href="javascript:location.reload()">Reiniciar</a></button>
+    </div>
+
+    <h1>3 en raya</h1>
+    <div class="box">
+        <table>
+            <tr>   
+                <td id="celda0" onclick="clickcelda(0)"></td>
+                <td id="celda1" onclick="clickcelda(1)"></td>
+                <td id="celda2" onclick="clickcelda(2)"></td>
+            </tr>
+            <tr>   
+                <td id="celda3" onclick="clickcelda(3)"></td>
+                <td id="celda4" onclick="clickcelda(4)"></td>
+                <td id="celda5" onclick="clickcelda(5)"></td>
+            </tr>
+            <tr>   
+                <td id="celda6" onclick="clickcelda(6)"></td>
+                <td id="celda7" onclick="clickcelda(7)"></td>
+                <td id="celda8" onclick="clickcelda(8)"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
